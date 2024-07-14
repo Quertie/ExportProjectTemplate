@@ -16,14 +16,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v2
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.2
+  
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v2.0.0
+      
     - name: Restore NuGet Packages
       run: nuget restore ExportProjectTemplate.sln
+      
     - name: Build
       run: msbuild ExportProjectTemplate.sln /p:Configuration=Release
+      
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.4
       with:
