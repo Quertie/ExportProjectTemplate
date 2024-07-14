@@ -42,7 +42,7 @@ Placing the `.exe` and `.dll` at the root of your repo:
 This application was botched together for a specific project, so all possibilities were not necessarily considered.
 
 - Only `.csproj` and `.vsproj` work for now, but it's an easy fix.
-- any `.csproj` file is considered 
+- any `.csproj` file is considered as a CSharp project (no distinction if it's a web project or not)
 - Only .ico and .png files are excluded from "Replace parameters" in the `.vstemplate` file. (and the initial parametrization step). Other resource files face the risk of becoming corrupt.
 - Only `$safeprojectname$` and `$guid1$` template parameters are introduced. This should be enough for a simple project.
 
