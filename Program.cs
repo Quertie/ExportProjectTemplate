@@ -1,4 +1,5 @@
 ﻿using DotNetProjectParser;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -12,11 +13,11 @@ namespace ExportProjectTemplate
 		{
 			var arguments = ParseArguments(args);
 
-			var projectPath = arguments["projectPath"];
-			var templateName = arguments["templateName"];
-			var outputFolderPath = arguments["outputFolderPath"];
-			var iconPath = arguments["iconPath"];
-			var previewImagePath = arguments["previewImagePath"];
+			var projectPath = TryGetArgument(arguments, "projectPath");
+			var templateName = TryGetArgument(arguments, "templateName");
+			var outputFolderPath = TryGetArgument(arguments, "outputFolderPath");
+			var iconPath = TryGetArgument(arguments, "iconPath");
+			var previewImagePath = TryGetArgument(arguments, "previewImagePath");
 
 			var projectFileName = Path.GetFileName(projectPath);
 			var project = Project.Construct(new FileInfo(projectPath));
@@ -42,12 +43,21 @@ namespace ExportProjectTemplate
 			return arguments;
 		}
 
+		private static string TryGetArgument(Dictionary<string, string> arguments, string key)
+		{
+			if (!arguments.TryGetValue(key, out var argument))
+			{
+				throw new ArgumentException($"Argument {key} is required");
+			}
+			return argument;
+		}
+
 		private static void ExportTemplateToTempFolder(string templateFolderPath,
-			Project project,
-			string projectFileName,
-			string iconPath,
-			string previewImagePath,
-			string templateName)
+													   Project project,
+													   string projectFileName,
+													   string iconPath,
+													   string previewImagePath,
+													   string templateName)
 		{
 			if (Directory.Exists(templateFolderPath)) Directory.Delete(templateFolderPath, true);
 
