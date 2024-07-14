@@ -5,6 +5,7 @@ This tool aims to do just that, enabling devs to produce project templates from 
 
 # Usage
 
+## Program usage
 `ExportProjectTemplate projectPath=<...> templateName=<...> outputFolderPath=<...> iconPath=<...> previewImagePath=<...>`
 
 with:
@@ -17,6 +18,24 @@ with:
 example:
 
 `ExportProjectTemplate projectPath=".\project.sln" templateName="My template" outputFolderPath="C:\Users\Quertie\Documents\Visual Studio 2022\Templates\Project Templates" iconPath=".\icon.ico" previewImagePath=".\preview.png"`
+
+## Usage in Azure DevOps pipeline
+
+Placing the `.exe` and `.dll` at the root of your repo:
+
+```YML
+- task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: .\ExportProjectTemplate.exe projectPath=".\project.csproj" templateName="Template Name" outputFolderPath="C:\Output" iconPath=".\icon.ico" previewImagePath=".\innovation.png"
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish AzureSignTool'
+    inputs:
+      PathtoPublish: 'C:\Output\Template Name.zip'
+      ArtifactName: 'Template Artifact'
+      publishLocation: 'Container'
+```
+
 
 # Limitations
 
