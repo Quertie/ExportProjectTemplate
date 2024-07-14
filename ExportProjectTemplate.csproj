@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DB24916F-3C90-4D08-A0E4-68AB452EE188}</ProjectGuid>
+    <ProjectGuid>{7C796B6B-86B5-4C57-ADAA-12CF1FECDA71}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>ExportProjectTemplate</RootNamespace>
     <AssemblyName>ExportProjectTemplate</AssemblyName>
@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetProjectParser, Version=1.0.1.0, Culture=neutral, PublicKeyToken=09f7f7425fffd169, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetProjectParser.1.0.2\lib\netstandard2.0\DotNetProjectParser.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression.FileSystem" />
@@ -56,8 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="DotNetProjectParser">
+      <Version>1.0.2</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
