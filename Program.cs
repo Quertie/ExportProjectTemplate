@@ -61,7 +61,7 @@ namespace ExportProjectTemplate
 		{
 			if (Directory.Exists(templateFolderPath)) Directory.Delete(templateFolderPath, true);
 
-			foreach (var item in project.Items.Where(i => i.ItemType != "Reference"))
+			foreach (var item in project.Items.Where(i => i.ItemType != "Reference" && i.ItemType != "PackageReference"))
 			{
 				var destFilePath = Path.Combine(templateFolderPath, item.Include);
 				Directory.CreateDirectory(Path.GetDirectoryName(destFilePath));
